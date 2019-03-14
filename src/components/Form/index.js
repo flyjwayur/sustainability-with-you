@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Form = () => {
   //destructured useState returns array (state, fn for updating state)
   const [text, setText] = useState({ age: '', birth: '', residence: '' });
   const [checked, setChecked] = useState(false);
-  const [formData, submitFormData] = useState([]);
+  //initalFormData becomes object
+  const initalFormData = JSON.parse(localStorage.getItem('formdata') || '[]');
+  const [formData, submitFormData] = useState(initalFormData);
+
+  //Only write formData to localStorage when the array has changed with 2nd arg
+  useEffect(() => {
+    localStorage.setItem('formdata', JSON.stringify(formData));
+  }, [formData]);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
