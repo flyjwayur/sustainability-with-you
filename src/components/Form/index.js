@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
+// Sustainability words
+const words = ['RenewableEnergy', 'Recycling', 'Biodiversity'];
+
+const wordsWithCheckBox = words.reduce((allWords, currentWord) => {
+  return { ...allWords, [currentWord]: false };
+}, {});
+
 const Form = () => {
   //destructured useState returns array (state, fn for updating state)
   const [text, setText] = useState({ age: '', birth: '', residence: '' });
-  const [checked, setChecked] = useState(false);
-  //initalFormData becomes object
-  const initalFormData = JSON.parse(localStorage.getItem('formdata') || '[]');
-  const [formData, submitFormData] = useState(initalFormData);
+  const [checked, setChecked] = useState(wordsWithCheckBox);
+  //initialFormData becomes object
+  const initialFormData = JSON.parse(localStorage.getItem('formData') || '[]');
+  const [formData, submitFormData] = useState(initialFormData);
 
   //Only write formData to localStorage when the array has changed with 2nd arg
   useEffect(() => {
-    localStorage.setItem('formdata', JSON.stringify(formData));
+    localStorage.setItem('formData', JSON.stringify(formData));
   }, [formData]);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
   };
 
-  const handleCheckbox = () => {
-    setChecked(!checked);
+  const handleCheckbox = e => {
+    setChecked({ ...checked, [e.target.name]: e.target.checked });
   };
 
   const handleSubmit = e => {
@@ -31,14 +38,31 @@ const Form = () => {
   return (
     <section>
       <ul>
-        {text.age && <li> text.age</li>}
-        {text.birth && <li>{text.birth}</li>}
-        {text.residence && <li>{text.residence}</li>}
-        <li>{checked.toString()}</li>
+        <li>{text.age}</li>
+        <li>{text.birth}</li>
+        <li>{text.residence}</li>
+      </ul>
+      <ul>
+        {Object.values(checked).map((checkedValue, index) => (
+          <li key={index}>{checkedValue.toString()}</li>
+        ))}
       </ul>
       <form onSubmit={handleSubmit}>
-        <label>Words I associate with sustainability?</label>
-        <input type="checkbox" value={checked} onChange={handleCheckbox} autoFocus />
+        <h2>Words I associate with sustainability?</h2>
+        {words.map((word, index) => {
+          return (
+            <div key={word + index}>
+              <label>{word}</label>
+              <input
+                name={word}
+                key={word + index}
+                type="checkbox"
+                value={checked}
+                onChange={e => handleCheckbox(e)}
+              />
+            </div>
+          );
+        })}
         <label>My age</label>
         <input name="age" type="number" value={text.age} onChange={e => handleText(e)} />
         <label>My country of birth</label>
