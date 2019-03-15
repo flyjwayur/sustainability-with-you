@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useReducer, useMemo } from 'react';
 
 // Sustainability words
 const words = ['RenewableEnergy', 'Recycling', 'Biodiversity'];
@@ -7,18 +7,41 @@ const wordsWithCheckBox = words.reduce((allWords, currentWord) => {
   return { ...allWords, [currentWord]: false };
 }, {});
 
-const Form = () => {
-  //destructured useState returns array (state, fn for updating state)
-  const [text, setText] = useState({ age: '', birth: '', residence: '' });
-  const [checked, setChecked] = useState(wordsWithCheckBox);
+//Custom hook
+const useFormWithLocalStorage = defaultValue => {
+  const formDataId = useRef(0);
   //initialFormData becomes object
-  const initialFormData = JSON.parse(localStorage.getItem('formData') || '[]');
-  const [formData, submitFormData] = useState(initialFormData);
+  const initialFormData = () => {
+    const valueFromLocalStorage = JSON.parse(
+      localStorage.getItem('formData') || JSON.stringify(defaultValue)
+    );
+
+    formDataId.current = valueFromLocalStorage.reduce((acc, curr) => Math.max(acc, curr), 0);
+    return valueFromLocalStorage;
+  };
+
+  const [formData, dispatch] = useReducer((state, action) => {
+    if (action.type === 'ADD_FORMDATA') {
+      formDataId.current += 1;
+      return [...state, { id: formDataId.current, content: action.content }];
+    }
+    return state;
+  }, useMemo(initialFormData, []));
 
   //Only write formData to localStorage when the array has changed with 2nd arg
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
   }, [formData]);
+  return [formData, dispatch];
+};
+
+const Form = () => {
+  //destructured useState returns array (state, fn for updating state)
+  const [text, setText] = useState({ age: '', birth: '', residence: '' });
+  const [checked, setChecked] = useState(wordsWithCheckBox);
+
+  const [formData, dispatch] = useFormWithLocalStorage([]);
+  // const [formData, submitFormData] = useState(initialFormData);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
@@ -31,7 +54,7 @@ const Form = () => {
   const handleSubmit = e => {
     e.preventDefault();
     window.alert(JSON.stringify({ id: Date.now(), content: { text, checked } }, null, 4));
-    submitFormData(prevForm => [...prevForm, { id: Date.now(), content: { text, checked } }]);
+    dispatch({ type: 'ADD_FORMDATA', content: { text, checked } });
     setText({ age: '', birth: '', residence: '' });
   };
 
