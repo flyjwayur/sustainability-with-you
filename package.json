@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.10"
   }
 }
