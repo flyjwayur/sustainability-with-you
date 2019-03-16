@@ -13,6 +13,11 @@
     "heroku-postbuild": "cd client && yarn && yarn run build",
     "dev": "concurrently \"yarn && yarn run start-watch\" \"cd  client  && yarn start\" "
   },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "pg": "^7.9.0"
+  },
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.10"
