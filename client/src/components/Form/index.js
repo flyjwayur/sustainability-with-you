@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useReducer, useMemo } from 'react';
+import axios from 'axios';
 
 // Sustainability words
 const words = ['RenewableEnergy', 'Recycling', 'Biodiversity'];
@@ -37,7 +38,7 @@ const useFormWithLocalStorage = defaultValue => {
 
 const Form = () => {
   //destructured useState returns array (state, fn for updating state)
-  const [text, setText] = useState({ age: '', birth: '', residence: '' });
+  const [text, setText] = useState({ age: '', countryBirth: '', countryResidence: '' });
   const [checked, setChecked] = useState(wordsWithCheckBox);
 
   const [formData, dispatch] = useFormWithLocalStorage([]);
@@ -53,17 +54,24 @@ const Form = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    window.alert(JSON.stringify({ id: Date.now(), content: { text, checked } }, null, 4));
-    dispatch({ type: 'ADD_FORMDATA', content: { text, checked } });
-    setText({ age: '', birth: '', residence: '' });
+    const { age, countryBirth, countryResidence } = text;
+    console.log('countryBirth', countryBirth);
+    console.log('countryResidence', countryResidence);
+    const words = checked;
+    window.alert(
+      JSON.stringify({ id: Date.now(), words, age, countryBirth, countryResidence }, null, 4)
+    );
+    axios.post('/api/formData', { words, age, countryBirth, countryResidence });
+    dispatch({ type: 'ADD_FORMDATA', content: { words, age, countryBirth, countryResidence } });
+    setText({ age: '', countryBirth: '', countryResidence: '' });
   };
 
   return (
     <section>
       <ul>
         <li>{text.age}</li>
-        <li>{text.birth}</li>
-        <li>{text.residence}</li>
+        <li>{text.countryBirth}</li>
+        <li>{text.countryResidence}</li>
       </ul>
       <ul>
         {Object.values(checked).map((checkedValue, index) => (
@@ -89,9 +97,19 @@ const Form = () => {
         <label>My age</label>
         <input name="age" type="number" value={text.age} onChange={e => handleText(e)} />
         <label>My country of birth</label>
-        <input name="birth" type="text" value={text.birth} onChange={e => handleText(e)} />
+        <input
+          name="countryBirth"
+          type="text"
+          value={text.countryBirth}
+          onChange={e => handleText(e)}
+        />
         <label>My country of residence</label>
-        <input name="residence" type="text" value={text.residence} onChange={e => handleText(e)} />
+        <input
+          name="countryResidence"
+          type="text"
+          value={text.countryResidence}
+          onChange={e => handleText(e)}
+        />
         <button type="submit">I am done</button>
       </form>
     </section>
