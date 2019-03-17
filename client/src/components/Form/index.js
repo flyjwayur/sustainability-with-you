@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+
 import { words, wordsWithCheckBox } from '../../api/data';
 import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
 
@@ -47,6 +48,14 @@ const Form = () => {
           <li key={index}>{checkedValue.toString()}</li>
         ))}
       </ul>
+      <div class="row">
+        <div class="input-field col s6">
+          <input value="Alvin" id="first_name2" type="text" class="validate" />
+          <label class="active" for="first_name2">
+            First Name
+          </label>
+        </div>
+      </div>
       <form onSubmit={handleSubmit}>
         <h2>Words I associate with sustainability?</h2>
         {words.map((word, index) => {
