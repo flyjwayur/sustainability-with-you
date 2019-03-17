@@ -1,40 +1,7 @@
-import React, { useState, useEffect, useRef, useReducer, useMemo } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-
-// Sustainability words
-const words = ['RenewableEnergy', 'Recycling', 'Biodiversity'];
-
-const wordsWithCheckBox = words.reduce((allWords, currentWord) => {
-  return { ...allWords, [currentWord]: false };
-}, {});
-
-//Custom hook
-const useFormWithLocalStorage = defaultValue => {
-  const formDataId = useRef(0);
-  //initialFormData becomes object
-  const initialFormData = () => {
-    const valueFromLocalStorage = JSON.parse(
-      localStorage.getItem('formData') || JSON.stringify(defaultValue)
-    );
-
-    formDataId.current = valueFromLocalStorage.reduce((acc, curr) => Math.max(acc, curr), 0);
-    return valueFromLocalStorage;
-  };
-
-  const [formData, dispatch] = useReducer((state, action) => {
-    if (action.type === 'ADD_FORMDATA') {
-      formDataId.current += 1;
-      return [...state, { id: formDataId.current, content: action.content }];
-    }
-    return state;
-  }, useMemo(initialFormData, []));
-
-  //Only write formData to localStorage when the array has changed with 2nd arg
-  useEffect(() => {
-    localStorage.setItem('formData', JSON.stringify(formData));
-  }, [formData]);
-  return [formData, dispatch];
-};
+import { words, wordsWithCheckBox } from '../../api/data';
+import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
 
 const Form = () => {
   //destructured useState returns array (state, fn for updating state)
@@ -42,7 +9,7 @@ const Form = () => {
   const [checked, setChecked] = useState(wordsWithCheckBox);
 
   const [formData, dispatch] = useFormWithLocalStorage([]);
-  // const [formData, submitFormData] = useState(initialFormData);
+  console.log('formData', formData);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
@@ -55,14 +22,16 @@ const Form = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const { age, countryBirth, countryResidence } = text;
-    console.log('countryBirth', countryBirth);
-    console.log('countryResidence', countryResidence);
     const words = checked;
-    window.alert(
-      JSON.stringify({ id: Date.now(), words, age, countryBirth, countryResidence }, null, 4)
-    );
-    axios.post('/api/formData', { words, age, countryBirth, countryResidence });
-    dispatch({ type: 'ADD_FORMDATA', content: { words, age, countryBirth, countryResidence } });
+
+    axios
+      .post('/api/formData', { words, age, countryBirth, countryResidence })
+      .then(res => {
+        dispatch({ type: 'ADD_FORMDATA', content: res.data });
+        window.alert(JSON.stringify(res.data, null, 4));
+      })
+      .catch(err => console.log('post response error'));
+
     setText({ age: '', countryBirth: '', countryResidence: '' });
   };
 
