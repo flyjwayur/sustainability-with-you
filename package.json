@@ -1,34 +1,28 @@
 {
   "name": "sustainability-with-you",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/flyjwayur/sustainability-with-you.git",
+  "author": "Hye Soo Park <flyjwayur@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "client-install": "cd client && yarn",
+    "start": "node app.js",
+    "start-watch": "nodemon app.js",
+    "client": "yarn start --prefix client",
+    "heroku-postbuild": "cd client && yarn && yarn run build",
+    "dev": "concurrently \"yarn && yarn run start-watch\" \"cd  client  && yarn start\" "
   },
-  "eslintConfig": {
-    "extends": "react-app",
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "react-hooks/rules-of-hooks": "error"
-    }
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "db-migrate": "^0.11.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "pg": "^7.9.0"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^1.5.1"
+    "concurrently": "^4.1.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
   }
 }
