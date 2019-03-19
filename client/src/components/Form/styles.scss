@@ -2,12 +2,29 @@
 @import '../../assets/styles/_mixins.scss';
 
 .form {
-  &__checkbox {
-    transition: all ease-in-out 0.3s;
+  &__container {
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+  &__checkboxs {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: fit-content;
 
-    &:hover,
-    &__text {
-      color: $primary;
+    &__checkbox {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+    &__checked {
+      transition: all ease-in-out 0.3s;
+
+      &:hover,
+      &__text {
+        color: $primary;
+      }
     }
   }
 }
