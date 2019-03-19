@@ -94,7 +94,10 @@ const Form = () => {
             value={text.countryResidence}
             onChange={e => handleText(e)}
           />
-          <button type="submit">I am done</button>
+          <button className="btn waves-effect waves-light" type="submit" name="action">
+            I am done
+            <i className="material-icons right">send</i>
+          </button>
         </form>
       </div>
     </section>
