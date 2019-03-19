@@ -10,6 +10,7 @@ const Form = () => {
 
   const [formData, dispatch] = useFormWithLocalStorage([]);
   console.log('formData', formData);
+  const [allFetchedData, setFetch] = useState([]);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
@@ -17,6 +18,17 @@ const Form = () => {
 
   const handleCheckbox = e => {
     setChecked({ ...checked, [e.target.name]: e.target.checked });
+  };
+
+  const handleFetchAllFormData = e => {
+    axios
+      .get('/api/formData')
+      .then(res => {
+        const data = res.data;
+        setFetch(data);
+        console.log('allfectchedData', data);
+      })
+      .catch(err => console.log('get response error'));
   };
 
   const handleSubmit = e => {
@@ -34,6 +46,8 @@ const Form = () => {
 
     setText({ age: '', countryBirth: '', countryResidence: '' });
   };
+
+  const sustainabilityWords = allFetchedData.words;
 
   return (
     <section>
@@ -81,6 +95,25 @@ const Form = () => {
         />
         <button type="submit">I am done</button>
       </form>
+
+      <button type="button" onClick={handleFetchAllFormData}>
+        Fetch all form data
+      </button>
+      <ul>
+        {allFetchedData &&
+          allFetchedData.map((data, index) => (
+            <div key={data + index}>
+              <li>{data.id}</li>
+              <ul>
+                {Object.entries(data.words).map((word, index) => (
+                  <li key={word + index}>{word}</li>
+                ))}
+              </ul>
+              <li>{data.countrybirth}</li>
+              <li>{data.countryresidence}</li>
+            </div>
+          ))}
+      </ul>
     </section>
   );
 };
