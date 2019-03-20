@@ -1,15 +1,13 @@
 import React from 'react';
 
-const index = () => {
+const Header = () => {
   return (
     <nav>
       <div className="nav-wrapper">
-        <a href="#" className="brand-logo left">
-          Sustainability
-        </a>
+        <span className="brand-logo left">Sustainability</span>
       </div>
     </nav>
   );
 };
 
-export default index;
+export default Header;

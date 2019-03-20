@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import Header from './components/Header';
-import Form from './components/Form';
-import './App.css';
+import Main from './components/Main';
+import Footer from './components/Footer';
+import './App.scss';
 
 class App extends Component {
+  state = {
+    formData: [],
+  };
+
+  componentDidMount() {
+    axios
+      .get('/api/formData')
+      .then(res => {
+        const formData = res.data;
+        this.setState({ formData });
+        console.log('allfectchedData', formData);
+      })
+      .catch(err => console.log('get response error'));
+  }
+
   render() {
+    const countAnswers = this.state.formData.length;
+
     return (
-      <div>
+      <div className="app">
         <Header />
-        <Form />
+        <Main />
+        <Footer countAnswers={countAnswers} />
       </div>
     );
   }
