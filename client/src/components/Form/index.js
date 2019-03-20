@@ -13,6 +13,7 @@ const Form = () => {
 
   const [formData, dispatch] = useFormWithLocalStorage([]);
   console.log('formData', formData);
+  const [allFetchedData, setFetch] = useState([]);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
@@ -20,6 +21,17 @@ const Form = () => {
 
   const handleCheckbox = e => {
     setChecked({ ...checked, [e.target.name]: e.target.checked });
+  };
+
+  const handleFetchAllFormData = e => {
+    axios
+      .get('/api/formData')
+      .then(res => {
+        const data = res.data;
+        setFetch(data);
+        console.log('allfectchedData', data);
+      })
+      .catch(err => console.log('get response error'));
   };
 
   const handleSubmit = e => {
@@ -37,6 +49,8 @@ const Form = () => {
 
     setText({ age: '', countryBirth: '', countryResidence: '' });
   };
+
+  const sustainabilityWords = allFetchedData.words;
 
   return (
     <div className="section grey lighten-3">
