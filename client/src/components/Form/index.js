@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import classNames from 'classnames';
 import { words, wordsWithCheckBox } from '../../api/data';
 import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
+
+import './styles.scss';
 
 const Form = () => {
   //destructured useState returns array (state, fn for updating state)
@@ -50,8 +53,9 @@ const Form = () => {
   const sustainabilityWords = allFetchedData.words;
 
   return (
-    <section>
-      <ul>
+    <div className="section grey lighten-3">
+      <section className={classNames('container center white', 'form__container')}>
+        {/* <ul>
         <li>{text.age}</li>
         <li>{text.countryBirth}</li>
         <li>{text.countryResidence}</li>
@@ -60,61 +64,123 @@ const Form = () => {
         {Object.values(checked).map((checkedValue, index) => (
           <li key={index}>{checkedValue.toString()}</li>
         ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <h2>Words I associate with sustainability?</h2>
-        {words.map((word, index) => {
-          return (
-            <div key={word + index}>
-              <label>{word}</label>
-              <input
-                name={word}
-                key={word + index}
-                type="checkbox"
-                value={checked}
-                onChange={e => handleCheckbox(e)}
-              />
-            </div>
-          );
-        })}
-        <label>My age</label>
-        <input name="age" type="number" value={text.age} onChange={e => handleText(e)} />
-        <label>My country of birth</label>
-        <input
-          name="countryBirth"
-          type="text"
-          value={text.countryBirth}
-          onChange={e => handleText(e)}
-        />
-        <label>My country of residence</label>
-        <input
-          name="countryResidence"
-          type="text"
-          value={text.countryResidence}
-          onChange={e => handleText(e)}
-        />
-        <button type="submit">I am done</button>
-      </form>
+      </ul> */}
 
-      <button type="button" onClick={handleFetchAllFormData}>
-        Fetch all form data
-      </button>
-      <ul>
-        {allFetchedData &&
-          allFetchedData.map((data, index) => (
-            <div key={data + index}>
-              <li>{data.id}</li>
-              <ul>
-                {Object.entries(data.words).map((word, index) => (
-                  <li key={word + index}>{word}</li>
-                ))}
-              </ul>
-              <li>{data.countrybirth}</li>
-              <li>{data.countryresidence}</li>
+        <div className="section">
+          <form className="col s12" onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col s12 m6">
+                <div className="card blue-grey darken-1">
+                  <div className="card-content white-text">
+                    <span className="card-title">Words I associate with sustainability?</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col s12 m6">
+                <div className="card">
+                  <div className={classNames('card-content', 'form__checkboxs')}>
+                    {words.map((word, index) => {
+                      console.log('checked', checked);
+                      return (
+                        <div
+                          className={classNames(
+                            'row',
+                            'chip',
+                            {
+                              form__checkboxs__checked: checked[word],
+                            },
+                            'form__checkboxs__checkbox'
+                          )}
+                          key={word + index}
+                        >
+                          <label>
+                            <input
+                              id="indeterminate-checkbox"
+                              name={word}
+                              key={word + index}
+                              type="checkbox"
+                              value={checked}
+                              onChange={e => handleCheckbox(e)}
+                            />
+                            <span
+                              className={classNames({
+                                form__checkboxs__checked__text: checked[word],
+                              })}
+                            >
+                              {word}
+                            </span>
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </div>
-          ))}
-      </ul>
-    </section>
+            <div className="divider" />
+            <div className="section">
+              <div className="row">
+                <div className="input-field col s8">
+                  <input
+                    name="age"
+                    id="age"
+                    type="number"
+                    value={text.age}
+                    onChange={e => handleText(e)}
+                    className="validate"
+                  />
+                  <label htmlFor="age">My age</label>
+                  <span className="helper-text" data-error="wrong" data-success="right">
+                    Number is required
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="section">
+              <div className="row">
+                <div className="input-field col s8">
+                  <input
+                    name="countryBirth"
+                    id="countryBirth"
+                    type="text"
+                    value={text.countryBirth}
+                    onChange={e => handleText(e)}
+                    className="validate"
+                    required
+                  />
+                  <label htmlFor="countryBirth">My country of birth</label>
+                  <span className="helper-text" data-error="wrong" data-success="right">
+                    Text is required
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="section">
+              <div className="row">
+                <div className="input-field col s8">
+                  <input
+                    name="countryResidence"
+                    id="countryResidence"
+                    type="text"
+                    value={text.countryResidence}
+                    onChange={e => handleText(e)}
+                    className="validate"
+                  />
+                  <label htmlFor="countryResidence">My country of residence</label>
+                  <span className="helper-text" data-error="wrong" data-success="right">
+                    Text is required
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button className="btn waves-effect waves-light" type="submit" name="action">
+              I am done
+              <i className="material-icons right">send</i>
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
   );
 };
 
