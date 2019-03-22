@@ -3,10 +3,10 @@ export const words = [
   'RenewableEnergy',
   'Recycling',
   'Biodiversity',
-  'test',
-  'test',
-  'test',
-  'test',
+  'test1',
+  'test2',
+  'test3',
+  'test4',
 ];
 
 export const wordsWithCheckBox = words.reduce((allWords, currentWord) => {

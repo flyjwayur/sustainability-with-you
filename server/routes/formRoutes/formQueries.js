@@ -17,7 +17,7 @@ const getAllFormData = (req, res) => {
 
 const addFormData = (req, res) => {
   console.log('req.body', req.body);
-  const { id, words, age, countryBirth, countryResidence } = req.body;
+  const { words, age, countryBirth, countryResidence } = req.body;
 
   pool.query(
     'INSERT INTO formData (words, age, countryBirth, countryResidence) VALUES ($1, $2, $3, $4) RETURNING *;',
