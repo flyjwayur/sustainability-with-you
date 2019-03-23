@@ -1,12 +1,25 @@
 // set up the configuration of PostgreSQL connection.
-const { Pool } = require('pg');
+const { Client } = require('pg');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const pool = new Pool({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
+  ssl: true,
 });
 
-console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
-module.exports = { pool };
+client
+  .connect()
+  .then(() => console.log('connected'))
+  .catch(err => console.log(err));
+
+// client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+//   if (err) throw err;
+//   for (let row of res.rows) {
+//     console.log(JSON.stringify(row));
+//   }
+//   client.end();
+// });
+
+module.exports = { client };

@@ -5,7 +5,6 @@ import { words, wordsWithCheckBox } from '../../api/data';
 import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
 import WordsForm from './WordsForm';
 import UserInfoForm from './UserInfoForm';
-
 import './styles.scss';
 
 const Form = () => {

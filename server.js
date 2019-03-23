@@ -3,21 +3,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 const port = process.env.PORT || 5007;
-// DB Con
-const { pool } = require('./db');
 const formRouter = require('./server/routes/formRoutes/formRoutes');
 
 const app = express();
 app.use(morgan('dev'));
-
-// Connect to Postgresql DB(Elephantsql cloud DB)
-pool.on('connect', () => {
-  console.log('connected to the db');
-});
-
-pool.on('error', err => {
-  console.log('db error from pool', err);
-});
 
 // BodyParser decode data in different formats.
 app.use(bodyParser.json());

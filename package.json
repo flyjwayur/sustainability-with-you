@@ -15,7 +15,8 @@
     "dev": "concurrently \"yarn && yarn run start-watch\" \"cd  client  && yarn start\" "
   },
   "engines": {
-    "node": "v11.9.0"
+    "node": "v11.9.0",
+    "yarn": "1.13.0"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
