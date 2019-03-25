@@ -19,8 +19,7 @@
     }
     &__checked {
       transition: all ease-in-out 0.3s;
-
-      &:hover,
+      &:hover &:active,
       &__text {
         color: $primary;
       }

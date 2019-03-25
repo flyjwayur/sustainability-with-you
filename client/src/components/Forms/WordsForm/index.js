@@ -28,6 +28,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
                   key={word + index}
                 >
                   <label>
+                    {/* checked={checked[word]} is needed for consistent Materialize style  between switching subforms*/}
                     <input
                       id="indeterminate-checkbox"
                       name={word}
@@ -35,6 +36,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
                       type="checkbox"
                       value={checked}
                       onChange={e => handleCheckbox(e)}
+                      checked={checked[word]}
                     />
                     <span
                       className={classNames({
