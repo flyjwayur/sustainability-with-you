@@ -39,7 +39,8 @@ const Form = () => {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
+    // To reload the page to get correct number of answers, make refresh the page on submit the form
+    // e.preventDefault();
     const { age, countryBirth, countryResidence } = text;
     const words = checked;
     const gender = radioChecked;
@@ -52,7 +53,18 @@ const Form = () => {
       })
       .catch(err => console.log('post response error'));
 
+    // Clean the text, checkbox and radio inputs after submit
     setText({ age: '', countryBirth: '', countryResidence: '' });
+    setChecked(wordsWithCheckBox);
+    setRadioChecked('');
+    // Lead a user to first Subform to be ready for next user's inputs
+    setCurrentPageIndex(0);
+  };
+
+  const handleEnterSubmit = e => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
   };
 
   const handleNextPage = () => {
@@ -74,7 +86,7 @@ const Form = () => {
     <div className="section grey lighten-3">
       <section className={classNames('container white', 'form__container')}>
         <div className="section">
-          <form className="col s12" onSubmit={handleSubmit}>
+          <form className="col s12" onSubmit={handleSubmit} onKeyPress={handleEnterSubmit}>
             <SubForm
               words={words}
               checked={checked}

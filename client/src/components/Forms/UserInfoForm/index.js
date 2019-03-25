@@ -18,7 +18,9 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               className="validate"
               required
             />
-            <label htmlFor="age">My age</label>
+            <label htmlFor="age" className="active">
+              My age
+            </label>
             <span className="helper-text" data-error="wrong" data-success="right">
               Number is required
             </span>
@@ -30,6 +32,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
         <div className="row">
           <p>
             <label htmlFor="male">
+              {/* checked={radioChecked === 'male'} is needed for consistent Materialize style  between switching subforms */}
               <input
                 type="radio"
                 id="male"
@@ -37,6 +40,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
                 onChange={e => handleRadiobox(e)}
                 value="male"
                 className="with-gap"
+                checked={radioChecked === 'male'}
               />
               <span>Male</span>
             </label>
@@ -50,6 +54,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
                 onChange={e => handleRadiobox(e)}
                 value="female"
                 className="with-gap"
+                checked={radioChecked === 'female'}
               />
               <span>Female</span>
             </label>
@@ -68,7 +73,9 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               className="validate"
               required
             />
-            <label htmlFor="countryBirth">My country of birth</label>
+            <label htmlFor="countryBirth" className="active">
+              My country of birth
+            </label>
             <span className="helper-text" data-error="wrong" data-success="right">
               Text is required
             </span>
@@ -87,7 +94,9 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               className="validate"
               required
             />
-            <label htmlFor="countryResidence">My country of residence</label>
+            <label htmlFor="countryResidence" className="active">
+              My country of residence
+            </label>
             <span className="helper-text" data-error="wrong" data-success="right">
               Text is required
             </span>
