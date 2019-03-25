@@ -11,7 +11,7 @@ const Form = () => {
   //destructured useState returns array (state, fn for updating state)
   const [text, setText] = useState({ age: '', countryBirth: '', countryResidence: '' });
   const [checked, setChecked] = useState(wordsWithCheckBox);
-
+  const [radioChecked, setRadioChecked] = useState('');
   const [formData, dispatch] = useFormWithLocalStorage([]);
   let [currentPageIndex, setCurrentPageIndex] = useState(0);
 
@@ -23,7 +23,7 @@ const Form = () => {
       Components: UserInfoForm,
     },
   ];
-  console.log('formData', formData);
+  // console.log('formData', formData);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
@@ -33,13 +33,19 @@ const Form = () => {
     setChecked({ ...checked, [e.target.name]: e.target.checked });
   };
 
+  const handleRadiobox = e => {
+    //When the radio button is checked, assign the value
+    if (e.target.checked) setRadioChecked(e.target.value);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     const { age, countryBirth, countryResidence } = text;
     const words = checked;
+    const gender = radioChecked;
 
     axios
-      .post('/api/formData', { words, age, countryBirth, countryResidence })
+      .post('/api/formData', { words, age, gender, countryBirth, countryResidence })
       .then(res => {
         dispatch({ type: 'ADD_FORMDATA', content: res.data });
         window.alert(JSON.stringify(res.data, null, 4));
@@ -73,9 +79,11 @@ const Form = () => {
               words={words}
               checked={checked}
               handleCheckbox={handleCheckbox}
-              handleNextPage={handleNextPage}
               text={text}
               handleText={handleText}
+              radioChecked={radioChecked}
+              handleRadiobox={handleRadiobox}
+              handleNextPage={handleNextPage}
               handlePreviousPage={handlePreviousPage}
             />
           </form>

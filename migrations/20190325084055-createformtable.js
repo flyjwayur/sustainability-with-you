@@ -30,6 +30,7 @@ exports.up = function(db, callback) {
       word8: { type: 'string', length: 30, notNull: true },
       word9: { type: 'string', length: 30, notNull: true },
       age: { type: 'int', notNull: true },
+      gender: { type: 'string', notNull: true },
       country_birth: { type: 'string', length: 50, notNull: true },
       country_residence: { type: 'string', length: 50, notNull: true },
     },
