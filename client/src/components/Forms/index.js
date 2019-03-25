@@ -52,7 +52,12 @@ const Form = () => {
       })
       .catch(err => console.log('post response error'));
 
+    // Clean the text, checkbox and radio inputs after submit
     setText({ age: '', countryBirth: '', countryResidence: '' });
+    setChecked(wordsWithCheckBox);
+    setRadioChecked('');
+    // Lead a user to first Subform to be ready for next user's inputs
+    setCurrentPageIndex(0);
   };
 
   const handleNextPage = () => {
