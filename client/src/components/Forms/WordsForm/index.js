@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import './styles.scss';
+
 const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
   return (
     <div className="row">
@@ -13,7 +15,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
       </div>
       <div className="col s12 m6">
         <div className="card">
-          <div className={classNames('card-content', 'form__checkboxs')}>
+          <div className={classNames('card-content', 'wordsForm')}>
             {words.map((word, index) => {
               return (
                 <div
@@ -21,9 +23,9 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
                     'row',
                     'chip',
                     {
-                      form__checkboxs__checked: checked[word],
+                      wordsForm__checked: checked[word],
                     },
-                    'form__checkboxs__checkbox'
+                    'wordsForm__checkbox'
                   )}
                   key={word + index}
                 >
@@ -40,7 +42,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
                     />
                     <span
                       className={classNames({
-                        form__checkboxs__checked__text: checked[word],
+                        wordsForm__checked__text: checked[word],
                       })}
                     >
                       {word}
