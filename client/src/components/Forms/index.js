@@ -61,6 +61,12 @@ const Form = () => {
     setCurrentPageIndex(0);
   };
 
+  const handleEnterSubmit = e => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   const handleNextPage = () => {
     if (currentPageIndex === forms.length) {
       setCurrentPageIndex = currentPageIndex;
@@ -80,7 +86,7 @@ const Form = () => {
     <div className="section grey lighten-3">
       <section className={classNames('container white', 'form__container')}>
         <div className="section">
-          <form className="col s12" onSubmit={handleSubmit}>
+          <form className="col s12" onSubmit={handleSubmit} onKeyPress={handleEnterSubmit}>
             <SubForm
               words={words}
               checked={checked}
