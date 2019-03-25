@@ -1,11 +1,11 @@
 const { client } = require('../../../db');
 
 const getAllFormData = (req, res) => {
-  const queryText = 'SELECT * FROM public.form_data ORDER BY id ASC';
+  const queryText = 'SELECT * FROM public.form_table ORDER BY id ASC';
   //For cloud DB,
-  // SELECT id, CAST(words as TEXT), countrybirth, countryresidence FROM form_data;
+  // SELECT id, CAST(words as TEXT), country_birth, country_residence FROM public.form_table;
   // SELECT id, json_each(words), age, country_birth, country_residence
-  // FROM public.form_data;
+  // FROM public.form_table;
   client.query(queryText, (error, results) => {
     if (error) {
       console.log(error);
@@ -25,7 +25,7 @@ const addFormData = (req, res) => {
   const { word0, word1, word2, word3, word4, word5, word6, word7, word8, word9 } = words;
 
   client.query(
-    'INSERT INTO public.form_data (word0, word1, word2, word3, word4, word5, word6, word7, word8, word9, age, country_birth, country_residence) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *;',
+    'INSERT INTO public.form_table (word0, word1, word2, word3, word4, word5, word6, word7, word8, word9, age, country_birth, country_residence) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *;',
     [
       word0,
       word1,
