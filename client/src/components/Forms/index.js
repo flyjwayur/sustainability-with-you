@@ -39,7 +39,8 @@ const Form = () => {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
+    // To reload the page to get correct number of answers, make refresh the page on submit the form
+    // e.preventDefault();
     const { age, countryBirth, countryResidence } = text;
     const words = checked;
     const gender = radioChecked;
