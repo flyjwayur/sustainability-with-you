@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import M from 'materialize-css';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
@@ -20,8 +19,6 @@ class App extends Component {
         console.log('allfectchedData', formData);
       })
       .catch(err => console.log('get response error'));
-
-    M.updateTextFields();
   }
 
   render() {
