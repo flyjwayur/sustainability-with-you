@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-// import './styles.scss';
 
 const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
   return (

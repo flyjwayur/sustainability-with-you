@@ -1,12 +1,15 @@
 // Sustainability words
 export const words = [
-  'RenewableEnergy',
-  'Recycling',
-  'Biodiversity',
-  'test1',
-  'test2',
-  'test3',
-  'test4',
+  'word0',
+  'word1',
+  'word2',
+  'word3',
+  'word4',
+  'word5',
+  'word6',
+  'word7',
+  'word8',
+  'word9',
 ];
 
 export const wordsWithCheckBox = words.reduce((allWords, currentWord) => {
