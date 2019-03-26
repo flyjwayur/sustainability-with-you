@@ -5,11 +5,11 @@ import './styles.scss';
 
 const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
   return (
-    <div className="row">
+    <div className="section">
       <div className="col s12 m6">
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
-            <span className="card-title">Words I associate with sustainability?</span>
+            <span className="card-title center">Words I associate with sustainability?</span>
           </div>
         </div>
       </div>

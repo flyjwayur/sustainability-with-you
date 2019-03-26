@@ -1,11 +1,22 @@
 import React from 'react';
+import classNames from 'classnames';
+import './styles.scss';
 
 const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePreviousPage }) => {
   return (
-    <>
-      <button type="button" className="btn waves-effect waves-light" onClick={handlePreviousPage}>
-        Back
-      </button>
+    <div className={classNames('section', 'userInfoForm')}>
+      <div className="section">
+        <div className="row">
+          <button
+            type="button"
+            className="btn waves-effect waves-light"
+            onClick={handlePreviousPage}
+          >
+            Back
+            <i className="material-icons left">arrow_back</i>
+          </button>
+        </div>
+      </div>
       <div className="section">
         <div className="row">
           <div className="input-field col s8">
@@ -103,11 +114,15 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
           </div>
         </div>
       </div>
-      <button className="btn waves-effect waves-light right" type="submit" name="action">
-        I am done
-        <i className="material-icons right">send</i>
-      </button>
-    </>
+      <div className="section">
+        <div className="row">
+          <button className="btn waves-effect waves-light right" type="submit" name="action">
+            I am done
+            <i className="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
