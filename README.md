@@ -1,6 +1,8 @@
 # Sustainability with you
 
-It's a form to understand people's perception on sustainability words.
+It's a form which helps to understand people's perception on sustainability words.
+Based on designer's mock up and several discussions, the form was designed & implemented.
+It's in progress along with discussions.
 
 - Demo : https://sustainabilitywithyou.herokuapp.com/
 
