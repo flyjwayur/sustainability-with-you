@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -59,6 +60,13 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
       </button>
     </div>
   );
+};
+
+WordsForm.propTypes = {
+  words: PropTypes.arrayOf(PropTypes.string).isRequired,
+  checked: PropTypes.objectOf(PropTypes.bool).isRequired,
+  handleCheckbox: PropTypes.func.isRequired,
+  handleNextPage: PropTypes.func.isRequired,
 };
 
 export default WordsForm;
