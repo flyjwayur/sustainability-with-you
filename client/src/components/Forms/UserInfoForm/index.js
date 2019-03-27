@@ -1,5 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+
 import './styles.scss';
 
 const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePreviousPage }) => {
@@ -124,6 +126,14 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
       </div>
     </div>
   );
+};
+
+UserInfoForm.propTypes = {
+  text: PropTypes.object.isRequired,
+  handleText: PropTypes.func.isRequired,
+  radioChecked: PropTypes.string.isRequired,
+  handleRadiobox: PropTypes.func.isRequired,
+  handlePreviousPage: PropTypes.func.isRequired,
 };
 
 export default UserInfoForm;

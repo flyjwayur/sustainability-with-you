@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Footer = ({ countAnswers }) => {
   return (
@@ -15,6 +16,10 @@ const Footer = ({ countAnswers }) => {
       </div>
     </footer>
   );
+};
+
+Footer.propTypes = {
+  countAnswers: PropTypes.number.isRequired,
 };
 
 export default Footer;

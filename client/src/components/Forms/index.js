@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import classNames from 'classnames';
+
 import { words, wordsWithCheckBox } from '../../api/data';
 import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
 import WordsForm from './WordsForm';
 import UserInfoForm from './UserInfoForm';
+
 import './styles.scss';
 
 const Form = () => {
