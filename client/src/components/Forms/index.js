@@ -6,6 +6,7 @@ import { words, wordsWithCheckBox } from '../../api/data';
 import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
 import WordsForm from './WordsForm';
 import UserInfoForm from './UserInfoForm';
+import { capitalizedFirstLetter } from '../../utils/formatValue';
 
 import './styles.scss';
 
@@ -46,14 +47,21 @@ const Form = () => {
   const handleSubmit = e => {
     // To reload the page to get correct number of answers, make refresh the page on submit the form
     e.preventDefault();
-    const { age, countryBirth, countryResidence } = text;
-    const words = checked;
+    let { age, countryBirth, countryResidence } = text;
+    countryBirth = capitalizedFirstLetter(countryBirth);
+    countryResidence = capitalizedFirstLetter(countryResidence);
 
-    console.log('checked', checked);
+    const words = checked;
     const gender = radioChecked;
 
     axios
-      .post('/api/formData', { words, age, gender, countryBirth, countryResidence })
+      .post('/api/formData', {
+        words,
+        age,
+        gender,
+        countryBirth,
+        countryResidence,
+      })
       .then(res => {
         dispatch({ type: 'ADD_FORMDATA', content: res.data });
         window.alert(JSON.stringify(res.data, null, 4));
