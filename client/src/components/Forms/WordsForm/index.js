@@ -37,7 +37,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
                       name={word}
                       key={word + index}
                       type="checkbox"
-                      value={checked}
+                      value={checked ? 1 : 0}
                       onChange={e => handleCheckbox(e)}
                       checked={checked[word]}
                     />

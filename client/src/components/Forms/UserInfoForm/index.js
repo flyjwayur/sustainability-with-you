@@ -32,7 +32,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               required
             />
             <label htmlFor="age" className="active">
-              My age
+              What is your age?
             </label>
             <span className="helper-text" data-error="wrong" data-success="right">
               Number is required
@@ -41,7 +41,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
         </div>
       </div>
       <div className="section">
-        <p> * Select Gender :</p>
+        <p> What is your Gender? </p>
         <div className="row">
           <p>
             <label htmlFor="male">
@@ -72,6 +72,20 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               <span>Female</span>
             </label>
           </p>
+          <p>
+            <label htmlFor="other">
+              <input
+                type="radio"
+                id="other"
+                name="gender"
+                onChange={e => handleRadiobox(e)}
+                value="other"
+                className="with-gap"
+                checked={radioChecked === 'other'}
+              />
+              <span>Other</span>
+            </label>
+          </p>
         </div>
       </div>
       <div className="section">
@@ -87,7 +101,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               required
             />
             <label htmlFor="countryBirth" className="active">
-              My country of birth
+              Which country did you born?
             </label>
             <span className="helper-text" data-error="wrong" data-success="right">
               Text is required
@@ -108,7 +122,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               required
             />
             <label htmlFor="countryResidence" className="active">
-              My country of residence
+              Which country do you live currently?
             </label>
             <span className="helper-text" data-error="wrong" data-success="right">
               Text is required
