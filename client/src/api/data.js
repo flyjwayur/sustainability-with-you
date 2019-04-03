@@ -14,9 +14,9 @@ export const words = [
   'internet',
   'system',
   'food',
-  'question'
+  'question',
 ];
 
 export const wordsWithCheckBox = words.reduce((allWords, currentWord) => {
-  return { ...allWords, [currentWord]: false };
+  return { ...allWords, [currentWord]: 0 };
 }, {});

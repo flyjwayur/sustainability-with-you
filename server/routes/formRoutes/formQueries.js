@@ -1,7 +1,7 @@
 const { client } = require('../../../db');
 
 const getAllFormData = (req, res) => {
-  const queryText = 'SELECT * FROM public.form_table1 ORDER BY id ASC';
+  const queryText = 'SELECT * FROM public.form_table2 ORDER BY id ASC';
   //For cloud DB,
   // SELECT id, CAST(words as TEXT), age, gender, country_birth, country_residence FROM public.form_table;
   // SELECT id, json_each(words), age, gender, country_birth, country_residence
@@ -41,7 +41,7 @@ const addFormData = (req, res) => {
   } = words;
 
   client.query(
-    'INSERT INTO public.form_table1 (climate,human, equality, change, future, global,local, cancer, economy, knowledge, energy,internet, system, food, question, age, gender, country_birth, country_residence) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12, $13, $14,$15, $16, $17, $18, $19) RETURNING *;',
+    'INSERT INTO public.form_table2 (climate,human, equality, change, future, global,local, cancer, economy, knowledge, energy,internet, system, food, question, age, gender, country_birth, country_residence) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10, $11, $12, $13, $14,$15, $16, $17, $18, $19) RETURNING *;',
     [
       climate,
       human,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import classNames from 'classnames';
 import { words, wordsWithCheckBox } from '../../api/data';
@@ -30,8 +30,11 @@ const Form = () => {
   };
 
   const handleCheckbox = e => {
-    setChecked({ ...checked, [e.target.name]: e.target.checked });
+    //To store boolean values in table
+    // const convertedZeroOrOne = e.target.checked ? 1 : 0;
+    setChecked({ ...checked, [e.target.name]: e.target.value });
   };
+  // useEffect(() => console.log('all checked', checked));
 
   const handleRadiobox = e => {
     //When the radio button is checked, assign the value
@@ -40,9 +43,11 @@ const Form = () => {
 
   const handleSubmit = e => {
     // To reload the page to get correct number of answers, make refresh the page on submit the form
-    // e.preventDefault();
+    e.preventDefault();
     const { age, countryBirth, countryResidence } = text;
     const words = checked;
+
+    console.log('checked', checked);
     const gender = radioChecked;
 
     axios
