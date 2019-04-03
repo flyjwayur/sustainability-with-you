@@ -37,7 +37,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
                       name={word}
                       key={word + index}
                       type="checkbox"
-                      value={checked ? 1 : 0}
+                      value={checked[word]}
                       onChange={e => handleCheckbox(e)}
                       checked={checked[word]}
                     />
@@ -64,7 +64,7 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
 
 WordsForm.propTypes = {
   words: PropTypes.arrayOf(PropTypes.string).isRequired,
-  checked: PropTypes.objectOf(PropTypes.bool).isRequired,
+  checked: PropTypes.objectOf(PropTypes.number).isRequired,
   handleCheckbox: PropTypes.func.isRequired,
   handleNextPage: PropTypes.func.isRequired,
 };

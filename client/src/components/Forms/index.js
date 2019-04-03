@@ -34,9 +34,9 @@ const Form = () => {
   const handleCheckbox = e => {
     //To store boolean values in table
     // const convertedZeroOrOne = e.target.checked ? 1 : 0;
-    setChecked({ ...checked, [e.target.name]: e.target.value });
+    setChecked({ ...checked, [e.target.name]: Number(e.target.checked) });
   };
-  // useEffect(() => console.log('all checked', checked));
+  useEffect(() => console.log('all checked', checked));
 
   const handleRadiobox = e => {
     //When the radio button is checked, assign the value

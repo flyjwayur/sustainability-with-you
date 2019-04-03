@@ -18,5 +18,5 @@ export const words = [
 ];
 
 export const wordsWithCheckBox = words.reduce((allWords, currentWord) => {
-  return { ...allWords, [currentWord]: 0 };
+  return { ...allWords, [currentWord]: Number(false) };
 }, {});
