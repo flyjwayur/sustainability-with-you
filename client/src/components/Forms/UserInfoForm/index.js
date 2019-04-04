@@ -54,6 +54,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
                 value="male"
                 className="with-gap"
                 checked={radioChecked === 'male'}
+                required
               />
               <span>Male</span>
             </label>
