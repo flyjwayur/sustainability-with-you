@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePreviousPage }) => {
+const UserInfoForm = ({
+  text,
+  handleText,
+  radioChecked,
+  handleRadiobox,
+  handlePreviousPage,
+  handleTouch,
+}) => {
   return (
     <div className={classNames('section', 'userInfoForm')}>
       <div className="section">
@@ -30,6 +37,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               onChange={e => handleText(e)}
               className="validate"
               required
+              onBlur={e => handleTouch(e)}
             />
             <label htmlFor="age" className="active">
               What is your age?
@@ -55,6 +63,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
                 className="with-gap"
                 checked={radioChecked === 'male'}
                 required
+                onBlur={e => handleTouch(e)}
               />
               <span>Male</span>
             </label>
@@ -100,6 +109,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               onChange={e => handleText(e)}
               className="validate"
               required
+              onBlur={e => handleTouch(e)}
             />
             <label htmlFor="countryBirth" className="active">
               Which country did you born?
@@ -121,6 +131,7 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
               onChange={e => handleText(e)}
               className="validate"
               required
+              onBlur={e => handleTouch(e)}
             />
             <label htmlFor="countryResidence" className="active">
               Which country do you live currently?

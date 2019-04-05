@@ -17,6 +17,13 @@ const Form = () => {
   const [radioChecked, setRadioChecked] = useState('');
   const [formData, dispatch] = useFormWithLocalStorage([]);
   let [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const [touched, setTouched] = useState({
+    word: false,
+    age: false,
+    gender: false,
+    countryBirth: false,
+    countryResidence: false,
+  });
 
   const forms = [
     {
@@ -26,7 +33,6 @@ const Form = () => {
       Components: UserInfoForm,
     },
   ];
-  // console.log('formData', formData);
 
   const handleText = e => {
     setText({ ...text, [e.target.name]: e.target.value });
@@ -42,6 +48,13 @@ const Form = () => {
   const handleRadiobox = e => {
     //When the radio button is checked, assign the value
     if (e.target.checked) setRadioChecked(e.target.value);
+  };
+
+  const handleTouch = e => {
+    //In case of checkbox, handle all words as 'word'
+    let name = e.target.type === 'checkbox' ? 'word' : e.target.name;
+
+    setTouched({ ...touched, [name]: true });
   };
 
   const handleSubmit = e => {
@@ -112,6 +125,7 @@ const Form = () => {
               handleRadiobox={handleRadiobox}
               handleNextPage={handleNextPage}
               handlePreviousPage={handlePreviousPage}
+              handleTouch={handleTouch}
             />
           </form>
         </div>
