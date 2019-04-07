@@ -4,7 +4,15 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePreviousPage }) => {
+const UserInfoForm = ({
+  text,
+  handleText,
+  radioChecked,
+  handleRadiobox,
+  handlePreviousPage,
+  handleSubmit,
+  handleEnterSubmit,
+}) => {
   return (
     <div className={classNames('section', 'userInfoForm')}>
       <div className="section">
@@ -133,7 +141,13 @@ const UserInfoForm = ({ text, handleText, radioChecked, handleRadiobox, handlePr
       </div>
       <div className="section">
         <div className="row">
-          <button className="btn waves-effect waves-light right" type="submit" name="action">
+          <button
+            className="btn waves-effect waves-light right"
+            type="submit"
+            name="action"
+            onClick={handleSubmit}
+            onKeyPress={handleEnterSubmit}
+          >
             I am done
             <i className="material-icons right">send</i>
           </button>
