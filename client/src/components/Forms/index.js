@@ -73,7 +73,7 @@ const Form = () => {
       })
       .then(res => {
         dispatch({ type: 'ADD_FORMDATA', content: res.data });
-        window.alert(JSON.stringify(res.data, null, 4));
+        window.alert('Thank you for submitting the form :D');
       })
       .catch(err => console.log('post response error'));
 
@@ -110,7 +110,7 @@ const Form = () => {
     <div className="section grey lighten-3">
       <section className={classNames('container white', 'form__container')}>
         <div className="section">
-          <form className="col s12" onSubmit={handleSubmit} onKeyPress={handleEnterSubmit}>
+          <form className="col s12">
             <SubForm
               words={words}
               checked={checked}
@@ -122,6 +122,8 @@ const Form = () => {
               handleRadiobox={handleRadiobox}
               handleNextPage={handleNextPage}
               handlePreviousPage={handlePreviousPage}
+              handleSubmit={handleSubmit}
+              handleEnterSubmit={handleEnterSubmit}
             />
           </form>
         </div>

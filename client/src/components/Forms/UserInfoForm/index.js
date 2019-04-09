@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const UserInfoForm = ({
-  radioChecked,
   handleRadiobox,
   handlePreviousPage,
   age,
+  radioChecked,
   countryBirth,
   countryResidence,
+  handleSubmit,
+  handleEnterSubmit,
 }) => {
   return (
     <div className={classNames('section', 'userInfoForm')}>
@@ -114,7 +116,13 @@ const UserInfoForm = ({
       </div>
       <div className="section">
         <div className="row">
-          <button className="btn waves-effect waves-light right" type="submit" name="action">
+          <button
+            className="btn waves-effect waves-light right"
+            type="submit"
+            name="action"
+            onClick={handleSubmit}
+            onKeyPress={handleEnterSubmit}
+          >
             I am done
             <i className="material-icons right">send</i>
           </button>
