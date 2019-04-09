@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import classNames from 'classnames';
 
@@ -7,12 +7,16 @@ import { useFormWithLocalStorage } from './customHooks/useFormWithLocalStorage';
 import WordsForm from './WordsForm';
 import UserInfoForm from './UserInfoForm';
 import { capitalizedFirstLetter } from '../../utils/formatValue';
+import validateForm from '../../validation/validateForm';
+import useTextInput from './customHooks/useTextInput';
 
 import './styles.scss';
 
 const Form = () => {
+  const ageInput = useTextInput('age', '', validateForm.age);
+  const countryBirthInput = useTextInput('countryBirth', '', validateForm.countryBirth);
+  const countryResidenceInput = useTextInput('countryResidence', '', validateForm.countryResidence);
   //destructured useState returns array (state, fn for updating state)
-  const [text, setText] = useState({ age: '', countryBirth: '', countryResidence: '' });
   const [checked, setChecked] = useState(wordsWithCheckBox);
   const [radioChecked, setRadioChecked] = useState('');
   const [formData, dispatch] = useFormWithLocalStorage([]);
@@ -26,18 +30,20 @@ const Form = () => {
       Components: UserInfoForm,
     },
   ];
-  // console.log('formData', formData);
 
-  const handleText = e => {
-    setText({ ...text, [e.target.name]: e.target.value });
-  };
+  // const handleText = e => {
+  //   setText({ ...text, [e.target.name]: e.target.value });
+  // };
 
   const handleCheckbox = e => {
     //To store boolean values in table
     // const convertedZeroOrOne = e.target.checked ? 1 : 0;
     setChecked({ ...checked, [e.target.name]: Number(e.target.checked) });
   };
-  useEffect(() => console.log('all checked', checked));
+  // useEffect(() => {
+  //   validateForm(checked, touched);
+  //   console.log('updated');
+  // }, [checked]);
 
   const handleRadiobox = e => {
     //When the radio button is checked, assign the value
@@ -46,8 +52,11 @@ const Form = () => {
 
   const handleSubmit = e => {
     // To reload the page to get correct number of answers, make refresh the page on submit the form
-    e.preventDefault();
-    let { age, countryBirth, countryResidence } = text;
+    // e.preventDefault();
+    // let { age, countryBirth, countryResidence } = text;
+    const age = ageInput.props.value;
+    let countryBirth = countryBirthInput.props.value;
+    let countryResidence = countryResidenceInput.props.value;
     countryBirth = capitalizedFirstLetter(countryBirth);
     countryResidence = capitalizedFirstLetter(countryResidence);
 
@@ -69,7 +78,7 @@ const Form = () => {
       .catch(err => console.log('post response error'));
 
     // Clean the text, checkbox and radio inputs after submit
-    setText({ age: '', countryBirth: '', countryResidence: '' });
+    // setText({ age: '', countryBirth: '', countryResidence: '' });
     setChecked(wordsWithCheckBox);
     setRadioChecked('');
     // Lead a user to first Subform to be ready for next user's inputs
@@ -106,8 +115,9 @@ const Form = () => {
               words={words}
               checked={checked}
               handleCheckbox={handleCheckbox}
-              text={text}
-              handleText={handleText}
+              age={ageInput}
+              countryBirth={countryBirthInput}
+              countryResidence={countryResidenceInput}
               radioChecked={radioChecked}
               handleRadiobox={handleRadiobox}
               handleNextPage={handleNextPage}

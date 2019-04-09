@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 const UserInfoForm = ({
-  text,
-  handleText,
-  radioChecked,
   handleRadiobox,
   handlePreviousPage,
+  age,
+  radioChecked,
+  countryBirth,
+  countryResidence,
   handleSubmit,
   handleEnterSubmit,
 }) => {
@@ -30,21 +31,11 @@ const UserInfoForm = ({
       <div className="section">
         <div className="row">
           <div className="input-field col s8">
-            <input
-              name="age"
-              id="age"
-              type="number"
-              value={text.age}
-              onChange={e => handleText(e)}
-              className="validate"
-              required
-            />
+            <input {...age.props} type="text" required />
             <label htmlFor="age" className="active">
               What is your age?
             </label>
-            <span className="helper-text" data-error="wrong" data-success="right">
-              Number is required
-            </span>
+            {age.error && <span className="userInfoForm__helper-text">{age.error}</span>}
           </div>
         </div>
       </div>
@@ -100,42 +91,26 @@ const UserInfoForm = ({
       <div className="section">
         <div className="row">
           <div className="input-field col s8">
-            <input
-              name="countryBirth"
-              id="countryBirth"
-              type="text"
-              value={text.countryBirth}
-              onChange={e => handleText(e)}
-              className="validate"
-              required
-            />
+            <input {...countryBirth.props} type="text" required />
             <label htmlFor="countryBirth" className="active">
               Which country did you born?
             </label>
-            <span className="helper-text" data-error="wrong" data-success="right">
-              Text is required
-            </span>
+            {countryBirth.error && (
+              <span className="userInfoForm__helper-text">{countryBirth.error}</span>
+            )}
           </div>
         </div>
       </div>
       <div className="section">
         <div className="row">
           <div className="input-field col s8">
-            <input
-              name="countryResidence"
-              id="countryResidence"
-              type="text"
-              value={text.countryResidence}
-              onChange={e => handleText(e)}
-              className="validate"
-              required
-            />
+            <input {...countryResidence.props} type="text" required />
             <label htmlFor="countryResidence" className="active">
               Which country do you live currently?
             </label>
-            <span className="helper-text" data-error="wrong" data-success="right">
-              Text is required
-            </span>
+            {countryResidence.error && (
+              <span className="userInfoForm__helper-text">{countryResidence.error}</span>
+            )}
           </div>
         </div>
       </div>
@@ -158,8 +133,9 @@ const UserInfoForm = ({
 };
 
 UserInfoForm.propTypes = {
-  text: PropTypes.object.isRequired,
-  handleText: PropTypes.func.isRequired,
+  age: PropTypes.object.isRequired,
+  countryBirth: PropTypes.object.isRequired,
+  countryResidence: PropTypes.object.isRequired,
   radioChecked: PropTypes.string.isRequired,
   handleRadiobox: PropTypes.func.isRequired,
   handlePreviousPage: PropTypes.func.isRequired,
