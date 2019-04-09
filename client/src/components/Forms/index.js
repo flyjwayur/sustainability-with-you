@@ -31,19 +31,10 @@ const Form = () => {
     },
   ];
 
-  // const handleText = e => {
-  //   setText({ ...text, [e.target.name]: e.target.value });
-  // };
-
   const handleCheckbox = e => {
     //To store boolean values in table
-    // const convertedZeroOrOne = e.target.checked ? 1 : 0;
     setChecked({ ...checked, [e.target.name]: Number(e.target.checked) });
   };
-  // useEffect(() => {
-  //   validateForm(checked, touched);
-  //   console.log('updated');
-  // }, [checked]);
 
   const handleRadiobox = e => {
     //When the radio button is checked, assign the value
@@ -53,7 +44,6 @@ const Form = () => {
   const handleSubmit = e => {
     // To reload the page to get correct number of answers, make refresh the page on submit the form
     // e.preventDefault();
-    // let { age, countryBirth, countryResidence } = text;
     const age = ageInput.props.value;
     let countryBirth = countryBirthInput.props.value;
     let countryResidence = countryResidenceInput.props.value;
@@ -77,8 +67,7 @@ const Form = () => {
       })
       .catch(err => console.log('post response error'));
 
-    // Clean the text, checkbox and radio inputs after submit
-    // setText({ age: '', countryBirth: '', countryResidence: '' });
+    // Clean the checkbox and radio inputs after submit
     setChecked(wordsWithCheckBox);
     setRadioChecked('');
     // Lead a user to first Subform to be ready for next user's inputs
