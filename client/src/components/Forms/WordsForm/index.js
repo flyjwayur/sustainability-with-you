@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const WordsForm = ({ words, checked, handleCheckbox, handleNextPage, handleTouch }) => {
+const WordsForm = ({ words, checked, handleCheckbox, handleNextPage }) => {
   return (
     <div className="section">
       <div className="col s12 m6">
@@ -40,7 +40,6 @@ const WordsForm = ({ words, checked, handleCheckbox, handleNextPage, handleTouch
                       value={checked[word]}
                       onChange={e => handleCheckbox(e)}
                       checked={checked[word]}
-                      onBlur={e => handleTouch(e)}
                     />
                     <span
                       className={classNames({
