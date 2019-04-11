@@ -104,13 +104,41 @@ const UserInfoForm = ({
       <div className="section">
         <div className="row">
           <div className="input-field col s8">
-            <input {...countryResidence.props} type="text" required />
+            <input
+              {...countryResidence.props}
+              type="text"
+              required
+              className="autocomplete"
+              onKeyDown={e => countryResidence.handleOnKeyDown(e)}
+            />
             <label htmlFor="countryResidence" className="active">
               Which country do you live currently?
             </label>
             {countryResidence.error && (
               <span className="userInfoForm__helper-text">{countryResidence.error}</span>
             )}
+            {/* When a user starts to type, show suggestions  */}
+            {countryResidence.showSuggestions ? (
+              // Only display suggestion or no suggestion after a user starts to type
+              countryResidence.filteredSuggestions.length > 0 ? (
+                <ul className="userInfoForm__suggestions">
+                  {countryResidence.filteredSuggestions.map((country, index) => (
+                    <li
+                      key={country + index}
+                      className={classNames('userInfoForm__suggestions__list', {
+                        'userInfoForm__suggestions__list--active':
+                          index === countryResidence.activeSuggestion,
+                      })}
+                      onClick={e => countryResidence.handleOnClick(e)}
+                    >
+                      {country}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div> No suggestions. </div>
+              )
+            ) : null}
           </div>
         </div>
       </div>
@@ -121,7 +149,7 @@ const UserInfoForm = ({
             type="submit"
             name="action"
             onClick={handleSubmit}
-            onKeyPress={handleEnterSubmit}
+            onKeyDown={handleEnterSubmit}
           >
             I am done
             <i className="material-icons right">send</i>

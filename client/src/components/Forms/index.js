@@ -9,13 +9,19 @@ import UserInfoForm from './UserInfoForm';
 import { capitalizedFirstLetter } from '../../utils/formatValue';
 import validateForm from '../../validation/validateForm';
 import useTextInput from './customHooks/useTextInput';
+import useCountrySuggestion from '../../components/Forms/customHooks/useCountrySuggestion';
 
 import './styles.scss';
 
 const Form = () => {
   const ageInput = useTextInput('age', '', validateForm.age);
+  // const countryBirthInput = useTextInput('countryBirth', '', validateForm.countryBirth);
   const countryBirthInput = useTextInput('countryBirth', '', validateForm.countryBirth);
-  const countryResidenceInput = useTextInput('countryResidence', '', validateForm.countryResidence);
+  const countryResidenceInput = useCountrySuggestion(
+    'countryResidence',
+    '',
+    validateForm.countryResidence
+  );
   //destructured useState returns array (state, fn for updating state)
   const [checked, setChecked] = useState(wordsWithCheckBox);
   const [radioChecked, setRadioChecked] = useState('');
@@ -43,7 +49,7 @@ const Form = () => {
 
   const handleSubmit = e => {
     // To reload the page to get correct number of answers, make refresh the page on submit the form
-    // e.preventDefault();
+    e.preventDefault();
     const age = ageInput.props.value;
     let countryBirth = countryBirthInput.props.value;
     let countryResidence = countryResidenceInput.props.value;
@@ -99,7 +105,7 @@ const Form = () => {
     <div className="section grey lighten-3">
       <section className={classNames('container white', 'form__container')}>
         <div className="section">
-          <form className="col s12">
+          <form className="col s12" autoComplete="off">
             <SubForm
               words={words}
               checked={checked}

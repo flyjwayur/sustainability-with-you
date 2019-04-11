@@ -6,6 +6,37 @@
   &__helper-text {
     color: #f44336;
   }
+
+  &__suggestions {
+    border: 1px solid $grey;
+    list-style: none;
+    margin-top: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-left: 0;
+    width: calc(300px + 1rem);
+
+    &__list {
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: $lightGrey;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      &--active {
+        background-color: $primary;
+        color: $white;
+        cursor: pointer;
+        font-weight: 500;
+      }
+    }
+
+    &__list:not(:last-of-type) {
+      border-bottom: 1px solid $grey;
+    }
+  }
 }
 
 /* Overwrite default material design with custom design
@@ -13,17 +44,17 @@ according to the error status in each input*/
 
 /* label underline focus color */
 .input-field input[type='number'] {
-  border-bottom: 1px solid #9e9e9e;
-  box-shadow: 0 1px 0 0 #9e9e9e;
+  border-bottom: 1px solid $lightGrey;
+  box-shadow: 0 1px 0 0 $lightGrey;
 }
 
 .input-field input[type='number'].valid {
-  border-bottom: 1px solid #4CAF50;
-  box-shadow: 0 1px 0 0 #4CAF50;
+  border-bottom: 1px solid $green-valid;
+  box-shadow: 0 1px 0 0 $green-valid;
 }
 
 /* invalid color */
 .input-field input[type='number'].invalid {
-  border-bottom: 1px solid #F44336;
-  box-shadow: 0 1px 0 0 #F44336;
+  border-bottom: 1px solid $red-invalid;
+  box-shadow: 0 1px 0 0 $red-invalid;
 }
